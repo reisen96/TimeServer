@@ -132,7 +132,7 @@
     <ClCompile Include="TimeServer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ServerException.h" />
+    <ClInclude Include="NetworkException.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="TimeServer.h" />
   </ItemGroup>

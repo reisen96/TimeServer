@@ -16,7 +16,7 @@ void TimeServer::send(char* bytes, int length)
 	if (bytesSent == SOCKET_ERROR)
 	{
 		serverSocket.close();
-		throw ServerException(std::string("Send error: ") + std::to_string(WSAGetLastError()));
+		throw NetworkException(std::string("Send error: ") + std::to_string(WSAGetLastError()));
 	}
 }
 
@@ -27,7 +27,7 @@ int TimeServer::receive()
 	if (bytesReceived == SOCKET_ERROR)
 	{
 		serverSocket.close();
-		throw ServerException(std::string("Receive error: ") + std::to_string(WSAGetLastError()));
+		throw NetworkException(std::string("Receive error: ") + std::to_string(WSAGetLastError()));
 	}
 	return bytesReceived;
 }
@@ -43,7 +43,7 @@ void TimeServer::run()
 			std::cout << bytesReceived << std::endl;
 			std::cout << receiveBuffer;
 		}
-		catch (ServerException exception) {
+		catch (NetworkException exception) {
 			std::cout << exception.what();
 		}
 		return;

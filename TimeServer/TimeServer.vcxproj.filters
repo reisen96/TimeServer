@@ -32,7 +32,7 @@
     <ClInclude Include="TimeServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ServerException.h">
+    <ClInclude Include="NetworkException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
