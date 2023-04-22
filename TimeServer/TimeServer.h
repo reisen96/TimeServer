@@ -15,7 +15,7 @@ private:
 	char receiveBuffer[bufferSize];
 	char sendBuffer[bufferSize];
 
-	void send();
+	void send(char* bytes, int length);
 	void receive();
 
 public:

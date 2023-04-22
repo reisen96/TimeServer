@@ -11,7 +11,7 @@ void Socket::initialize(std::string ipAddress, unsigned short port, int type, in
 	if (NO_ERROR != WSAStartup(MAKEWORD(majorWinsockVersion, minorWinsockVersion), &wsaData))
 		throw "Error initializing Winsock";
 	windowsSocket = socket(AF_INET, type, protocol);
-	if (INVALID_SOCKET == windowsSocket)
+	if (windowsSocket == INVALID_SOCKET)
 	{
 		WSACleanup();
 		throw "Error initializing socket: " + WSAGetLastError();
@@ -23,7 +23,7 @@ void Socket::initialize(std::string ipAddress, unsigned short port, int type, in
 
 void Socket::bindToPort()
 {
-	if (SOCKET_ERROR == bind(windowsSocket, (SOCKADDR*)&socketAddress, sizeof(socketAddress)))
+	if (bind(windowsSocket, (SOCKADDR*)&socketAddress, sizeof(socketAddress)) == SOCKET_ERROR)
 	{
 		close();
 		throw "Error binding socket: " + WSAGetLastError();
