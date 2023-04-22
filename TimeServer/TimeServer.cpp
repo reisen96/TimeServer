@@ -12,18 +12,29 @@ void TimeServer::send(char* bytes, int length)
 	for (int i = 0; i < length; ++i)
 		sendBuffer[i] = bytes[i];
 	bytesSent = sendto(*serverSocket.getWindowsSocket(), sendBuffer, (int)strlen(sendBuffer), 0, (const sockaddr*)&clientSocketAddress, clientSocketAddressLength);
-	if (SOCKET_ERROR == bytesSent)
+	if (bytesSent == SOCKET_ERROR)
 	{
 		serverSocket.close();
-		throw "Error: " + WSAGetLastError();
+		throw "Send error: " + WSAGetLastError();
 	}
 }
 
-void TimeServer::receive() 
+int TimeServer::receive()
 {
-
+	int bytesReceived;
+	bytesReceived = recvfrom(*serverSocket.getWindowsSocket(), receiveBuffer, bufferSize, 0, &clientSocketAddress, &clientSocketAddressLength);
+	if (bytesReceived == SOCKET_ERROR)
+	{
+		serverSocket.close();
+		throw "Receive error: " + WSAGetLastError();
+	}
+	return bytesReceived;
 }
 
-void TimeServer::run() {
+void TimeServer::run() 
+{
+	while (true) 
+	{
 
+	}
 }
