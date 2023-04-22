@@ -5,6 +5,13 @@ TimeServer::TimeServer()
 	serverSocket.initialize("", serverPort);
 	serverSocket.bindToPort();
 	clientSocketAddressLength = sizeof(clientSocketAddress);
+	initializeMethodCodes();
+}
+
+void TimeServer::initializeMethodCodes()
+{
+	serverMethodCodes[std::string("GetTime")] = 1;
+	// More...
 }
 
 void TimeServer::send(const char* bytes, int length)
@@ -34,7 +41,7 @@ int TimeServer::receive()
 
 void TimeServer::sendString(std::string responseString)
 {
-	send(responseString.c_str(), (int)responseString.length());
+	send(responseString.c_str(), (int)responseString.length() + 1);
 }
 
 std::string TimeServer::receiveString()
@@ -46,13 +53,15 @@ std::string TimeServer::receiveString()
 
 void TimeServer::run() 
 {
+	int requestCode;
 	std::string requestString, responseString;
 	while (true) 
 	{
 		try 
 		{
 			requestString = receiveString();
-
+			requestCode = serverMethodCodes[requestString];
+			std::cout << requestCode;
 		}
 		catch (NetworkException exception) 
 		{

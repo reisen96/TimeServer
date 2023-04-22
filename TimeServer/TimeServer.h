@@ -14,6 +14,9 @@ private:
 	int clientSocketAddressLength;
 	char receiveBuffer[bufferSize];
 	char sendBuffer[bufferSize];
+	std::unordered_map<std::string, int> serverMethodCodes;
+
+	void initializeMethodCodes();
 
 	void send(const char* bytes, int length);
 	int receive();
