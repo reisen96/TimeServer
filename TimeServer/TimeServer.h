@@ -8,7 +8,7 @@ class TimeServer
 {
 private:
 
-	const unsigned short port = 27015u;
+	const unsigned short serverPort = 27015u;
 	Socket serverSocket;
 	sockaddr clientSocketAddress;
 	int clientSocketAddressLength;
@@ -17,6 +17,9 @@ private:
 
 	void send(const char* bytes, int length);
 	int receive();
+
+	void sendString(std::string responseString);
+	std::string receiveString();
 
 public:
 

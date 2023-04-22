@@ -2,9 +2,9 @@
 
 TimeServer::TimeServer()
 {
-	serverSocket.initialize("", port);
-	clientSocketAddressLength = sizeof(clientSocketAddress);
+	serverSocket.initialize("", serverPort);
 	serverSocket.bindToPort();
+	clientSocketAddressLength = sizeof(clientSocketAddress);
 }
 
 void TimeServer::send(const char* bytes, int length)
@@ -32,21 +32,31 @@ int TimeServer::receive()
 	return bytesReceived;
 }
 
+void TimeServer::sendString(std::string responseString)
+{
+	send(responseString.c_str(), (int)responseString.length());
+}
+
+std::string TimeServer::receiveString()
+{
+	int bytesReceived = receive();
+	receiveBuffer[bytesReceived] = '\0';
+	return std::string(receiveBuffer);
+}
+
 void TimeServer::run() 
 {
-	int bytesReceived;
+	std::string requestString, responseString;
 	while (true) 
 	{
-		try {
-			bytesReceived = receive();
-			receiveBuffer[bytesReceived] = '\0';
-			std::cout << bytesReceived << std::endl;
-			std::cout << receiveBuffer;
-			send("Cool!", 6);
+		try 
+		{
+			requestString = receiveString();
+
 		}
-		catch (NetworkException exception) {
+		catch (NetworkException exception) 
+		{
 			std::cout << exception.what();
 		}
-		return;
 	}
 }
