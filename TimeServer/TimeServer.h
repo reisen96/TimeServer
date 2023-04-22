@@ -23,6 +23,5 @@ public:
 	TimeServer();
 	
 	void run();
-	void stop();
 };
 

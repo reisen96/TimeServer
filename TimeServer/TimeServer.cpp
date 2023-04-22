@@ -15,3 +15,7 @@ void TimeServer::receive()
 {
 
 }
+
+void TimeServer::run() {
+
+}
