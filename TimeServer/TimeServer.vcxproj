@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ServerException.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="TimeServer.cpp" />
   </ItemGroup>
