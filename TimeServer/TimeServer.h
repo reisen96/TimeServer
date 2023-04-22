@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Socket.h"
+#include "ServerException.h"
 
 constexpr int bufferSize = 255;
 
