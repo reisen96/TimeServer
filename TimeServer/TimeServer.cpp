@@ -7,7 +7,7 @@ TimeServer::TimeServer()
 	serverSocket.bindToPort();
 }
 
-void TimeServer::send(char* bytes, int length)
+void TimeServer::send(const char* bytes, int length)
 {
 	int bytesSent;
 	for (int i = 0; i < length; ++i)
@@ -42,6 +42,7 @@ void TimeServer::run()
 			receiveBuffer[bytesReceived] = '\0';
 			std::cout << bytesReceived << std::endl;
 			std::cout << receiveBuffer;
+			send("Cool!", 6);
 		}
 		catch (NetworkException exception) {
 			std::cout << exception.what();
