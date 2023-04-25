@@ -30,6 +30,7 @@ private:
 	char receiveBuffer[bufferSize];
 	char sendBuffer[bufferSize];
 	std::unordered_map<std::string, ServerMethod> serverMethodCodes;
+	Clock serverClock;
 
 	void initializeMethodCodes();
 

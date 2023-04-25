@@ -74,7 +74,7 @@ void TimeServer::run()
 			switch (requestMethod) 
 			{
 			case ServerMethod::GetTime:
-
+				responseString = serverClock.getTime();
 				break;
 			default:
 				responseString = "Invalid request";
