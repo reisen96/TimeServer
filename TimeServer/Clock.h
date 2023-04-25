@@ -11,5 +11,6 @@ private:
 public:
 
 	std::string getTime();
+	std::string getTimeWithoutDate();
 };
 

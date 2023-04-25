@@ -8,3 +8,11 @@ std::string Clock::getTime()
 	currentTimeString[currentTimeString.length() - 1] = '\0';
 	return currentTimeString;
 }
+
+std::string Clock::getTimeWithoutDate() 
+{
+	std::string currentTimeString;
+
+
+	return currentTimeString;
+}
