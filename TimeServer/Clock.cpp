@@ -2,6 +2,9 @@
 
 std::string Clock::getTime()
 {
+	std::string currentTimeString;
 	currentTime = std::time(nullptr);
-	return std::string(std::ctime(&currentTime));
+	currentTimeString = std::ctime(&currentTime);
+	currentTimeString[currentTimeString.length() - 1] = '\0';
+	return currentTimeString;
 }
