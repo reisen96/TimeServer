@@ -8,13 +8,28 @@ class TimeServer
 {
 private:
 
+	enum class ServerMethod {
+		GetTime = 1,
+		GetTimeWithoutDate,
+		GetTimeSinceEpoch,
+		GetClientToServerDelayEstimation,
+		MeasureRTT,
+		GetTimeWithoutDateOrSeconds,
+		GetYear,
+		GetMonthAndDay,
+		GetSecondsSinceBeginingOfMonth,
+		GetWeekOfYear,
+		GetDaylightSavings,
+		GetTimeWithoutDateInCity
+	};
+
 	const unsigned short serverPort = 27015u;
 	Socket serverSocket;
 	sockaddr clientSocketAddress;
 	int clientSocketAddressLength;
 	char receiveBuffer[bufferSize];
 	char sendBuffer[bufferSize];
-	std::unordered_map<std::string, int> serverMethodCodes;
+	std::unordered_map<std::string, ServerMethod> serverMethodCodes;
 
 	void initializeMethodCodes();
 

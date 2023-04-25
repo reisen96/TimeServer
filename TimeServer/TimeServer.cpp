@@ -10,8 +10,18 @@ TimeServer::TimeServer()
 
 void TimeServer::initializeMethodCodes()
 {
-	serverMethodCodes[std::string("GetTime")] = 1;
-	// More...
+	serverMethodCodes[std::string("GetTime")] = ServerMethod::GetTime;
+	serverMethodCodes[std::string("GetTimeWithoutDate")] = ServerMethod::GetTimeWithoutDate;
+	serverMethodCodes[std::string("GetTimeSinceEpoch")] = ServerMethod::GetTimeSinceEpoch;
+	serverMethodCodes[std::string("GetClientToServerDelayEstimation")] = ServerMethod::GetClientToServerDelayEstimation;
+	serverMethodCodes[std::string("MeasureRTT")] = ServerMethod::MeasureRTT;
+	serverMethodCodes[std::string("GetTimeWithoutDateOrSeconds")] = ServerMethod::GetTimeWithoutDateOrSeconds;
+	serverMethodCodes[std::string("GetYear")] = ServerMethod::GetYear;
+	serverMethodCodes[std::string("GetMonthAndDay")] = ServerMethod::GetMonthAndDay;
+	serverMethodCodes[std::string("GetSecondsSinceBeginingOfMonth")] = ServerMethod::GetSecondsSinceBeginingOfMonth;
+	serverMethodCodes[std::string("GetWeekOfYear")] = ServerMethod::GetWeekOfYear;
+	serverMethodCodes[std::string("GetDaylightSavings")] = ServerMethod::GetDaylightSavings;
+	serverMethodCodes[std::string("GetTimeWithoutDateInCity")] = ServerMethod::GetTimeWithoutDateInCity;
 }
 
 void TimeServer::send(const char* bytes, int length)
@@ -53,15 +63,14 @@ std::string TimeServer::receiveString()
 
 void TimeServer::run() 
 {
-	int requestCode;
+	ServerMethod requestMethod;
 	std::string requestString, responseString;
 	while (true) 
 	{
 		try 
 		{
 			requestString = receiveString();
-			requestCode = serverMethodCodes[requestString];
-			std::cout << requestCode;
+			requestMethod = serverMethodCodes[requestString];
 		}
 		catch (NetworkException exception) 
 		{
