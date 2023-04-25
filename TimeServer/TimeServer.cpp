@@ -71,6 +71,15 @@ void TimeServer::run()
 		{
 			requestString = receiveString();
 			requestMethod = serverMethodCodes[requestString];
+			switch (requestMethod) 
+			{
+			case ServerMethod::GetTime:
+
+				break;
+			default:
+				responseString = "Invalid request";
+			}
+			sendString(responseString);
 		}
 		catch (NetworkException exception) 
 		{

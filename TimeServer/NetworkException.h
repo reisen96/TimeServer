@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
 #include <unordered_map>
 
 #define _WINSOCK_DEPRECATED_NO_WARNINGS

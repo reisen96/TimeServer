@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="TimeServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="NetworkException.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="TimeServer.h" />
