@@ -26,3 +26,8 @@ std::string Clock::getTimeSinceEpoch()
 	currentTimeString << currentTime;
 	return currentTimeString.str();
 }
+
+std::string Clock::getSystemUptime()
+{
+	return std::to_string(GetTickCount());
+}

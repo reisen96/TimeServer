@@ -82,6 +82,9 @@ void TimeServer::run()
 			case ServerMethod::GetTimeSinceEpoch:
 				responseString = serverClock.getTimeSinceEpoch();
 				break;
+			case ServerMethod::GetClientToServerDelayEstimation:
+				responseString = serverClock.getSystemUptime();
+				break;
 			default:
 				responseString = "Invalid request";
 			}
