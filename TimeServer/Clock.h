@@ -12,5 +12,6 @@ public:
 
 	std::string getTime();
 	std::string getTimeWithoutDate();
+	std::string getTimeSinceEpoch();
 };
 

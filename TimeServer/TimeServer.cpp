@@ -76,6 +76,12 @@ void TimeServer::run()
 			case ServerMethod::GetTime:
 				responseString = serverClock.getTime();
 				break;
+			case ServerMethod::GetTimeWithoutDate:
+				responseString = serverClock.getTimeWithoutDate();
+				break;
+			case ServerMethod::GetTimeSinceEpoch:
+				responseString = serverClock.getTimeSinceEpoch();
+				break;
 			default:
 				responseString = "Invalid request";
 			}

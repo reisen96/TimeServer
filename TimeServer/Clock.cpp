@@ -11,8 +11,18 @@ std::string Clock::getTime()
 
 std::string Clock::getTimeWithoutDate() 
 {
-	std::string currentTimeString;
+	char buffer[255];
+	std::tm* timeWithoutDate;
+	currentTime = std::time(nullptr);
+	timeWithoutDate = std::localtime(&currentTime);
+	std::strftime(buffer, 254, "%T", timeWithoutDate);
+	return std::string(buffer);
+}
 
-
-	return currentTimeString;
+std::string Clock::getTimeSinceEpoch() 
+{
+	std::stringstream currentTimeString;
+	currentTime = std::time(nullptr);
+	currentTimeString << currentTime;
+	return currentTimeString.str();
 }
