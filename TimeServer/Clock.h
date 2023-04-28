@@ -19,5 +19,8 @@ public:
 	std::string getTimeWithoutDateOrSeconds();
 	std::string getYear();
 	std::string getMonthAndDay();
+	std::string getSecondsSinceBeginingOfMonth();
+	std::string getWeekOfYear();
+	std::string getDaylightSavings();
 };
 

@@ -51,3 +51,26 @@ std::string Clock::getMonthAndDay()
 {
 	return getFormattedTime("%B %d");
 }
+
+std::string Clock::getSecondsSinceBeginingOfMonth()
+{
+	std::tm* beginingOfMonth;
+	currentTime = std::time(nullptr);
+	beginingOfMonth = std::localtime(&currentTime);
+	beginingOfMonth->tm_mday = 1;
+	beginingOfMonth->tm_hour = 0;
+	beginingOfMonth->tm_min = 0;
+	beginingOfMonth->tm_sec = 0;
+	return std::to_string(std::difftime(currentTime, mktime(beginingOfMonth)));
+}
+
+std::string Clock::getWeekOfYear() 
+{
+	return getFormattedTime("%U");
+}
+
+std::string Clock::getDaylightSavings() 
+{
+	currentTime = std::time(nullptr);
+	return std::localtime(&currentTime)->tm_isdst ? std::string("1") : std::string("0");
+}

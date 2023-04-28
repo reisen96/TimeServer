@@ -97,7 +97,9 @@ void TimeServer::run()
 			case ServerMethod::GetMonthAndDay:
 				responseString = serverClock.getMonthAndDay();
 				break;
-
+			case ServerMethod::GetSecondsSinceBeginingOfMonth:
+				responseString = serverClock.getSecondsSinceBeginingOfMonth();
+				break;
 			default:
 				responseString = "Invalid request";
 			}
