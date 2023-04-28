@@ -85,6 +85,19 @@ void TimeServer::run()
 			case ServerMethod::GetClientToServerDelayEstimation:
 				responseString = serverClock.getSystemUptime();
 				break;
+			case ServerMethod::MeasureRTT:
+				responseString = serverClock.getSystemUptime();
+				break;
+			case ServerMethod::GetTimeWithoutDateOrSeconds:
+				responseString = serverClock.getTimeWithoutDateOrSeconds();
+				break;
+			case ServerMethod::GetYear:
+				responseString = serverClock.getYear();
+				break;
+			case ServerMethod::GetMonthAndDay:
+				responseString = serverClock.getMonthAndDay();
+				break;
+
 			default:
 				responseString = "Invalid request";
 			}
