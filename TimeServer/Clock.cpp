@@ -74,3 +74,8 @@ std::string Clock::getDaylightSavings()
 	currentTime = std::time(nullptr);
 	return std::localtime(&currentTime)->tm_isdst ? std::string("1") : std::string("0");
 }
+
+std::string Clock::getSupportedCities() 
+{
+	return std::string("");
+}

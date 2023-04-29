@@ -22,5 +22,6 @@ public:
 	std::string getSecondsSinceBeginingOfMonth();
 	std::string getWeekOfYear();
 	std::string getDaylightSavings();
+	std::string getSupportedCities();
 };
 
