@@ -100,12 +100,15 @@ void TimeServer::run()
 			case ServerMethod::GetSecondsSinceBeginingOfMonth:
 				responseString = serverClock.getSecondsSinceBeginingOfMonth();
 				break;
+			case ServerMethod::GetDaylightSavings:
+				responseString = serverClock.getDaylightSavings();
+				break;
 			default:
 				responseString = "Invalid request";
 			}
 			sendString(responseString);
 		}
-		catch (NetworkException exception) 
+		catch (std::exception exception)
 		{
 			std::cout << exception.what();
 		}
