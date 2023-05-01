@@ -1,12 +1,25 @@
 #include "Clock.h"
 
+Clock::Clock() 
+{
+	initializeTimeDifference();
+}
+
+void Clock::initializeTimeDifference()
+{
+	timeDifference["Doha"] = 3;
+	timeDifference["Prague"] = 2;
+	timeDifference["New York"] = -4;
+	timeDifference["Berlin"] = 2;
+}
+
 std::string Clock::getFormattedTime(const char* format)
 {
 	char buffer[255];
-	std::tm* timeWithoutDate;
+	std::tm* timeToFormat;
 	currentTime = std::time(nullptr);
-	timeWithoutDate = std::localtime(&currentTime);
-	std::strftime(buffer, 254, format, timeWithoutDate);
+	timeToFormat = std::localtime(&currentTime);
+	std::strftime(buffer, 254, format, timeToFormat);
 	return std::string(buffer);
 }
 
@@ -77,5 +90,8 @@ std::string Clock::getDaylightSavings()
 
 std::string Clock::getSupportedCities() 
 {
-	return std::string("");
+	std::string supportedCities("Supported cities:\n");
+	for (std::pair<std::string, int> pair : timeDifference) 
+		supportedCities.append(pair.first + '\n');
+	return supportedCities;
 }

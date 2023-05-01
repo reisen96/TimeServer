@@ -103,6 +103,9 @@ void TimeServer::run()
 			case ServerMethod::GetDaylightSavings:
 				responseString = serverClock.getDaylightSavings();
 				break;
+			case ServerMethod::GetTimeWithoutDateInCity:
+				sendString(serverClock.getSupportedCities());
+				break;
 			default:
 				responseString = "Invalid request";
 			}

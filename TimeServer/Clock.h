@@ -7,10 +7,14 @@ class Clock
 private:
 
 	time_t currentTime;
+	std::unordered_map<std::string, int> timeDifference;
 
+	void initializeTimeDifference();
 	std::string getFormattedTime(const char* format);
 
 public:
+
+	Clock();
 
 	std::string getTime();
 	std::string getTimeWithoutDate();
