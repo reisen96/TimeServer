@@ -46,7 +46,7 @@ std::string Clock::getTimeSinceEpoch()
 	std::stringstream currentTimeString;
 	currentTime = std::time(nullptr);
 	currentTimeString << currentTime;
-	return currentTimeString.str();
+	return currentTimeString.str() + " seconds";
 }
 
 std::string Clock::getTimeWithoutDateOrSeconds()
@@ -74,7 +74,7 @@ std::string Clock::getSecondsSinceBeginingOfMonth()
 	timeObject->tm_hour = 0;
 	timeObject->tm_min = 0;
 	timeObject->tm_sec = 0;
-	return std::to_string(std::difftime(currentTime, mktime(timeObject)));
+	return std::to_string((unsigned int)std::difftime(currentTime, mktime(timeObject))) + " seconds";
 }
 
 std::string Clock::getWeekOfYear() 
