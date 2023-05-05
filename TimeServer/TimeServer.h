@@ -25,7 +25,7 @@ private:
 	};
 
 	const unsigned short serverPort = 27015u;
-	const unsigned int timeLapLimit = 180000;
+	const unsigned int timeLapLimit = 180000u;
 	Socket serverSocket;
 	sockaddr clientSocketAddress;
 	int clientSocketAddressLength;
@@ -46,7 +46,6 @@ private:
 	std::string receiveString();
 
 	std::string getSystemUptime();
-
 public:
 
 	TimeServer();
