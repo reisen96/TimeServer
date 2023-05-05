@@ -6,6 +6,8 @@ TimeServer::TimeServer()
 	serverSocket.bindToPort();
 	clientSocketAddressLength = sizeof(clientSocketAddress);
 	initializeMethodCodes();
+	timeLapActive = false;
+	timeLapStart = 0u;
 }
 
 void TimeServer::initializeMethodCodes()
@@ -22,6 +24,16 @@ void TimeServer::initializeMethodCodes()
 	serverMethodCodes[std::string("GetWeekOfYear")] = ServerMethod::GetWeekOfYear;
 	serverMethodCodes[std::string("GetDaylightSavings")] = ServerMethod::GetDaylightSavings;
 	serverMethodCodes[std::string("GetTimeWithoutDateInCity")] = ServerMethod::GetTimeWithoutDateInCity;
+	serverMethodCodes[std::string("MeasureTimeLap")] = ServerMethod::MeasureTimeLap;
+}
+
+inline void TimeServer::checkTimeLap() 
+{
+	if ((unsigned int)GetTickCount() - timeLapStart > timeLapLimit) 
+	{
+		timeLapActive = false;
+		timeLapStart = 0u;
+	}
 }
 
 void TimeServer::send(const char* bytes, int length)
@@ -61,6 +73,11 @@ std::string TimeServer::receiveString()
 	return std::string(receiveBuffer);
 }
 
+std::string TimeServer::getSystemUptime()
+{
+	return std::to_string(GetTickCount());
+}
+
 void TimeServer::run() 
 {
 	ServerMethod requestMethod;
@@ -83,10 +100,10 @@ void TimeServer::run()
 				responseString = serverClock.getTimeSinceEpoch();
 				break;
 			case ServerMethod::GetClientToServerDelayEstimation:
-				responseString = serverClock.getSystemUptime();
+				responseString = getSystemUptime();
 				break;
 			case ServerMethod::MeasureRTT:
-				responseString = serverClock.getSystemUptime();
+				responseString = getSystemUptime();
 				break;
 			case ServerMethod::GetTimeWithoutDateOrSeconds:
 				responseString = serverClock.getTimeWithoutDateOrSeconds();
@@ -109,6 +126,20 @@ void TimeServer::run()
 			case ServerMethod::GetTimeWithoutDateInCity:
 				sendString(serverClock.getSupportedCities());
 				responseString = serverClock.getTimeForCity(receiveString());
+				break;
+			case ServerMethod::MeasureTimeLap:
+				checkTimeLap();
+				if (!timeLapActive) 
+				{
+					timeLapStart = (unsigned int)GetTickCount();
+					timeLapActive = true;
+					responseString = std::string("Time lap calculation is now active, limit is 3 minutes");
+				}
+				else
+				{
+					responseString = std::to_string((unsigned int)GetTickCount() - timeLapStart) + "ms";
+					timeLapActive = false;
+				}
 				break;
 			default:
 				responseString = "Invalid request";

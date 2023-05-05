@@ -49,11 +49,6 @@ std::string Clock::getTimeSinceEpoch()
 	return currentTimeString.str();
 }
 
-std::string Clock::getSystemUptime()
-{
-	return std::to_string(GetTickCount());
-}
-
 std::string Clock::getTimeWithoutDateOrSeconds()
 {
 	calculateCurrentTime();

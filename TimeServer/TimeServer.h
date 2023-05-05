@@ -20,10 +20,12 @@ private:
 		GetSecondsSinceBeginingOfMonth,
 		GetWeekOfYear,
 		GetDaylightSavings,
-		GetTimeWithoutDateInCity
+		GetTimeWithoutDateInCity,
+		MeasureTimeLap
 	};
 
 	const unsigned short serverPort = 27015u;
+	const unsigned int timeLapLimit = 180000;
 	Socket serverSocket;
 	sockaddr clientSocketAddress;
 	int clientSocketAddressLength;
@@ -31,14 +33,19 @@ private:
 	char sendBuffer[bufferSize];
 	std::unordered_map<std::string, ServerMethod> serverMethodCodes;
 	Clock serverClock;
+	bool timeLapActive;
+	unsigned int timeLapStart;
 
 	void initializeMethodCodes();
+	inline void checkTimeLap();
 
 	void send(const char* bytes, int length);
 	int receive();
 
 	void sendString(const std::string& responseString);
 	std::string receiveString();
+
+	std::string getSystemUptime();
 
 public:
 
