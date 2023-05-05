@@ -20,7 +20,7 @@ private:
 
 public:
 
-	NetworkException(std::string message) { errorMessage = message; }
+	NetworkException(const std::string& message) { errorMessage = message; }
 	const char* what() { return errorMessage.c_str(); }
 };
 

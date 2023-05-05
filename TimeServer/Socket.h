@@ -17,7 +17,7 @@ public:
 
 	SOCKET getWindowsSocket() { return windowsSocket; }
 
-	void initialize(std::string ipAddress, unsigned short port, int type = SOCK_DGRAM, int protocol = IPPROTO_UDP);
+	void initialize(const std::string& ipAddress, unsigned short port, int type = SOCK_DGRAM, int protocol = IPPROTO_UDP);
 	void bindToPort();
 	void close();
 };

@@ -7,6 +7,7 @@ class Clock
 private:
 
 	time_t currentTime;
+	std::tm* timeObject;
 	std::unordered_map<std::string, int> timeDifference;
 
 	void initializeTimeDifference();
@@ -27,5 +28,6 @@ public:
 	std::string getWeekOfYear();
 	std::string getDaylightSavings();
 	std::string getSupportedCities();
+	std::string getTimeForCity(const std::string& city);
 };
 

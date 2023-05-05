@@ -5,7 +5,7 @@ Socket::~Socket()
 	close();
 }
 
-void Socket::initialize(std::string ipAddress, unsigned short port, int type, int protocol)
+void Socket::initialize(const std::string& ipAddress, unsigned short port, int type, int protocol)
 {
 	WSAData wsaData;
 	if (NO_ERROR != WSAStartup(MAKEWORD(majorWinsockVersion, minorWinsockVersion), &wsaData))

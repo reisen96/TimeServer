@@ -16,10 +16,9 @@ void Clock::initializeTimeDifference()
 std::string Clock::getFormattedTime(const char* format)
 {
 	char buffer[255];
-	std::tm* timeToFormat;
 	currentTime = std::time(nullptr);
-	timeToFormat = std::localtime(&currentTime);
-	std::strftime(buffer, 254, format, timeToFormat);
+	timeObject = std::localtime(&currentTime);
+	std::strftime(buffer, 254, format, timeObject);
 	return std::string(buffer);
 }
 
@@ -67,14 +66,13 @@ std::string Clock::getMonthAndDay()
 
 std::string Clock::getSecondsSinceBeginingOfMonth()
 {
-	std::tm* beginingOfMonth;
 	currentTime = std::time(nullptr);
-	beginingOfMonth = std::localtime(&currentTime);
-	beginingOfMonth->tm_mday = 1;
-	beginingOfMonth->tm_hour = 0;
-	beginingOfMonth->tm_min = 0;
-	beginingOfMonth->tm_sec = 0;
-	return std::to_string(std::difftime(currentTime, mktime(beginingOfMonth)));
+	timeObject = std::localtime(&currentTime);
+	timeObject->tm_mday = 1;
+	timeObject->tm_hour = 0;
+	timeObject->tm_min = 0;
+	timeObject->tm_sec = 0;
+	return std::to_string(std::difftime(currentTime, mktime(timeObject)));
 }
 
 std::string Clock::getWeekOfYear() 
@@ -94,4 +92,15 @@ std::string Clock::getSupportedCities()
 	for (std::pair<std::string, int> pair : timeDifference) 
 		supportedCities.append(pair.first + '\n');
 	return supportedCities;
+}
+
+std::string Clock::getTimeForCity(const std::string& city)
+{
+	int difference = timeDifference[city];
+	if (!difference)
+		return std::string("Unsupported city");
+	currentTime = std::time(nullptr);
+	timeObject = std::gmtime(&currentTime);
+	timeObject->tm_hour = (timeObject->tm_hour + difference) % 24;
+	return getFormattedTime("%T");
 }

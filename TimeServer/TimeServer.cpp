@@ -49,7 +49,7 @@ int TimeServer::receive()
 	return bytesReceived;
 }
 
-void TimeServer::sendString(std::string responseString)
+void TimeServer::sendString(const std::string& responseString)
 {
 	send(responseString.c_str(), (int)responseString.length() + 1);
 }
@@ -105,6 +105,7 @@ void TimeServer::run()
 				break;
 			case ServerMethod::GetTimeWithoutDateInCity:
 				sendString(serverClock.getSupportedCities());
+				responseString = "test";
 				break;
 			default:
 				responseString = "Invalid request";

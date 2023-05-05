@@ -37,7 +37,7 @@ private:
 	void send(const char* bytes, int length);
 	int receive();
 
-	void sendString(std::string responseString);
+	void sendString(const std::string& responseString);
 	std::string receiveString();
 
 public:
