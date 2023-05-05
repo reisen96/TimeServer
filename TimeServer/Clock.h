@@ -10,6 +10,7 @@ private:
 	std::tm* timeObject;
 	std::unordered_map<std::string, int> timeDifference;
 
+	inline void calculateCurrentTime();
 	void initializeTimeDifference();
 	std::string getFormattedTime(const char* format);
 

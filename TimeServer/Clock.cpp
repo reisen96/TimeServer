@@ -5,6 +5,12 @@ Clock::Clock()
 	initializeTimeDifference();
 }
 
+inline void Clock::calculateCurrentTime() 
+{
+	currentTime = std::time(nullptr);
+	timeObject = std::localtime(&currentTime);
+}
+
 void Clock::initializeTimeDifference()
 {
 	timeDifference["Doha"] = 3;
@@ -16,8 +22,6 @@ void Clock::initializeTimeDifference()
 std::string Clock::getFormattedTime(const char* format)
 {
 	char buffer[255];
-	currentTime = std::time(nullptr);
-	timeObject = std::localtime(&currentTime);
 	std::strftime(buffer, 254, format, timeObject);
 	return std::string(buffer);
 }
@@ -33,6 +37,7 @@ std::string Clock::getTime()
 
 std::string Clock::getTimeWithoutDate() 
 {
+	calculateCurrentTime();
 	return getFormattedTime("%T");
 }
 
@@ -51,23 +56,25 @@ std::string Clock::getSystemUptime()
 
 std::string Clock::getTimeWithoutDateOrSeconds()
 {
+	calculateCurrentTime();
 	return getFormattedTime("%R");
 }
 
 std::string Clock::getYear() 
 {
+	calculateCurrentTime();
 	return getFormattedTime("%Y");
 }
 
 std::string Clock::getMonthAndDay() 
 {
+	calculateCurrentTime();
 	return getFormattedTime("%B %d");
 }
 
 std::string Clock::getSecondsSinceBeginingOfMonth()
 {
-	currentTime = std::time(nullptr);
-	timeObject = std::localtime(&currentTime);
+	calculateCurrentTime();
 	timeObject->tm_mday = 1;
 	timeObject->tm_hour = 0;
 	timeObject->tm_min = 0;
@@ -77,6 +84,7 @@ std::string Clock::getSecondsSinceBeginingOfMonth()
 
 std::string Clock::getWeekOfYear() 
 {
+	calculateCurrentTime();
 	return getFormattedTime("%U");
 }
 

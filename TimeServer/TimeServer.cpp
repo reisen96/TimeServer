@@ -100,12 +100,15 @@ void TimeServer::run()
 			case ServerMethod::GetSecondsSinceBeginingOfMonth:
 				responseString = serverClock.getSecondsSinceBeginingOfMonth();
 				break;
+			case ServerMethod::GetWeekOfYear:
+				responseString = serverClock.getWeekOfYear();
+				break;
 			case ServerMethod::GetDaylightSavings:
 				responseString = serverClock.getDaylightSavings();
 				break;
 			case ServerMethod::GetTimeWithoutDateInCity:
 				sendString(serverClock.getSupportedCities());
-				responseString = "test";
+				responseString = serverClock.getTimeForCity(receiveString());
 				break;
 			default:
 				responseString = "Invalid request";
