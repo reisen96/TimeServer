@@ -2,6 +2,8 @@
 
 #include "NetworkException.h"
 
+constexpr int formattedTimeBufferSize = 255;
+
 class Clock
 {
 private:
