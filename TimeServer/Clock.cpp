@@ -80,7 +80,7 @@ std::string Clock::getSecondsSinceBeginingOfMonth()
 std::string Clock::getWeekOfYear() 
 {
 	calculateCurrentTime();
-	return getFormattedTime("%U");
+	return "Week #" + getFormattedTime("%U");
 }
 
 std::string Clock::getDaylightSavings() 
